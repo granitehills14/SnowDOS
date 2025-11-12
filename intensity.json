@@ -1,0 +1,12 @@
+[
+  {
+    "type": "readers.copc"
+  },
+  {
+    "type":"writers.gdal",
+    "dimension":"intensity",
+    "data_type":"float",
+    "output_type":"mean",
+    "resolution": 0.02
+  }
+]

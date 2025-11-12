@@ -1,0 +1,10 @@
+[
+    {
+      "type": "readers.copc"
+    },
+    {
+      "type": "writers.gdal",
+      "where": "Classification == 2",
+      "output_type":"idw"
+    }
+]

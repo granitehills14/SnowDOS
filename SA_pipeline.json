@@ -1,0 +1,54 @@
+[
+    {
+      "type": "readers.las"
+    },
+    { 
+      "type": "filters.sample",
+      "radius": 0.05
+    },
+    {
+      "type" : "filters.outlier",
+      "method" : "statistical",
+      "multiplier" : 10,
+      "mean_k" : 5,
+      "class" : 7
+    },
+    { 
+      "type" : "filters.elm", 
+      "cell" : 0.30, 
+      "threshold" : 0.05,
+      "where" : "Classification != 7",
+      "class" : 7
+    },
+    {
+      "type": "filters.smrf",
+      "cell" : 0.5,
+      "window" : 4.0, 
+      "slope" : 1.2,
+      "threshold" : 0.07,
+      "scalar" : 1.15,
+      "cut" : 3.5,
+      "ignore" : "Classification[7:7]"
+    },
+    {
+      "type" : "filters.hag_delaunay"
+    },
+    {
+      "type": "filters.outlier",
+      "method": "radius", 
+      "radius": 0.30, 
+      "min_k": 10, 
+      "class": 7,
+      "where": "HeightAboveGround < -0.15"
+    },
+    {
+      "type": "filters.assign",
+      "where": "HeightAboveGround >= -0.05 && HeightAboveGround <= 0.05",
+      "value": "Classification=2"
+    },
+    {
+      "type" : "writers.copc",
+      "extra_dims" : "all",
+      "forward" : "all"
+    }
+  ]

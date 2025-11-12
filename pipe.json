@@ -1,0 +1,42 @@
+[
+    {
+      "type": "readers.las"
+    },
+    {
+       "type": "filters.sample",
+       "cell": 0.05
+    },
+    {
+       "type": "filters.elm",
+       "cell": 0.1,
+       "threshold": 0.001
+    },
+    {
+       "type": "filters.outlier",
+       "method": "statistical",
+       "multiplier": 2,
+       "mean_k": 6
+    },
+    {
+       "type": "filters.smrf",
+       "where": "Classification != 7 && NumberOfReturns > 0 && ReturnNumber > 0 && Classification != 6",
+       "cell": 0.15,
+       "slope": 0.5,
+       "threshold": 0.05,
+       "scalar": 1.25,
+       "cut": 0
+    },
+    {
+      "type": "writers.gdal",
+      "resolution":0.25,
+      "where": "Classification == 2",
+      "output_type":"min",
+      "override_srs": "EPSG:32761"
+    },
+    {
+       "type":"writers.copc",
+        "where": "Classification != 7",
+        "a_srs": "EPSG:32761"
+
+    }
+]

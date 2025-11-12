@@ -1,0 +1,40 @@
+[
+    {
+      "type" : "readers.copc"
+    },
+    {
+      "type" : "filters.normal",
+      "knn" : 12
+    },
+    {
+      "type" : "filters.approximatecoplanar",
+      "knn" : 12,
+      "where" : "Classification==1"
+
+    },
+    {
+      "type" : "filters.expression",
+      "expression" : "Classification==1 && (NormalZ < 0.966 || NormalZ > -0.966)"
+    },
+    {
+      "type" : "filters.expression",
+      "expression" : "Classification==1 && HeightAboveGround>0.30 && HeightAboveGround<2.0"
+    },
+    {
+      "type" : "filters.radialdensity",
+      "radius" : 0.25
+    },
+    {
+      "type" : "filters.range",
+      "limits" : "RadialDensity[350:]"
+    },
+    {
+    "type" : "writers.gdal",
+    "dimension" : "Classification",
+    "output_type" : "max",
+    "data_type" : "uint8",
+    "resolution" : 0.10,
+    "binmode" : true,
+    "nodata" : 0
+    }
+]
